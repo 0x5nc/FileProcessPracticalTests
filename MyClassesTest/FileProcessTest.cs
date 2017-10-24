@@ -25,6 +25,34 @@ namespace MyClassesTest
         }
         #endregion
 
+        #region Test Initialize and Cleanup
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            SetGoodFileName();
+            if ( TestContext.TestName =="FileNameDoesExist")
+            {
+                if (!string.IsNullOrEmpty(_goodFileName))
+                {
+                    TestContext.WriteLine("Creating the File " + _goodFileName);
+                    File.AppendAllText(_goodFileName, "test string");
+                }
+            }
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            if (TestContext.TestName == "FileNameDoesExist")
+            {
+                if (!string.IsNullOrEmpty(_goodFileName))
+                {
+                    TestContext.WriteLine("Deleting the File " + _goodFileName);
+                    File.Delete(_goodFileName);
+                }
+            }
+        }
+        #endregion
 
 
         public TestContext TestContext { get; set; }
@@ -39,15 +67,15 @@ namespace MyClassesTest
             bool fromCall;
 
             SetGoodFileName();
-            TestContext.WriteLine("Creating the File " + _goodFileName);
-            File.AppendAllText(_goodFileName, "test string");
+            //TestContext.WriteLine("Creating the File " + _goodFileName);
+            //File.AppendAllText(_goodFileName, "test string");
 
             TestContext.WriteLine("Creating the File " + _goodFileName);
             fromCall = fp.FileExists(_goodFileName);
             Assert.IsTrue(fromCall);
 
-            TestContext.WriteLine("Deleting the File " + _goodFileName);
-            File.Delete(_goodFileName);
+            //TestContext.WriteLine("Deleting the File " + _goodFileName);
+            //File.Delete(_goodFileName);
         }
 
         [TestMethod]
