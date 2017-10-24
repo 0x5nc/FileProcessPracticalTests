@@ -12,6 +12,21 @@ namespace MyClassesTest
         private const string _badFileName = @"C:\RandomFileToForceError";
         private string _goodFileName;
 
+        #region Class Initialize and Cleanup
+        [ClassInitialize]
+        public static void ClassInitilize(TestContext tc)
+        {
+            tc.WriteLine("In the Class Initialize Method.");
+        }
+
+        [ClassCleanup]
+        public static void ClassCleanup()
+        {
+        }
+        #endregion
+
+
+
         public TestContext TestContext { get; set; }
 
         /// <summary>
