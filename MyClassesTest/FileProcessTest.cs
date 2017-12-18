@@ -110,6 +110,7 @@ namespace MyClassesTest
             catch(ArgumentNullException)
             {
                 //The test was a success
+                //Added this 2nd comment to test commit at workplace
                 return;
             }
 
